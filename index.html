@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison pour Chabatt mon frère</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDEDE8; --card:#FFFFFF; --ink:#111110; --muted:#83837D; --faint:#AEAEA6;
+  --panel:#F4F4EF; --line:#E7E7E0;
+  --green1:#6BCB57; --green2:#3BA63F; --orange1:#F6A75C; --orange2:#EC8430;
+  --mint:#DFF2DE; --mint-ink:#1E7A2E; --amber:#F7EFD2; --amber-ink:#8A6D1A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{font-family:'Onest',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+/* ===== Topbar ===== */
+.topbar{position:sticky;top:12px;z-index:50;max-width:1160px;margin:12px auto 0;padding:0 24px}
+.topbar-in{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(255,255,255,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(0,0,0,.04);border-radius:999px;padding:10px 12px 10px 22px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.logo{font-weight:700;font-size:.95rem;letter-spacing:-.01em}
+.logo em{font-style:normal;color:var(--green2)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.fbtn{border:none;background:transparent;color:var(--muted);padding:8px 15px;border-radius:999px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Onest',sans-serif}
+.fbtn:hover{background:#EFEFEA;color:var(--ink)}
+.fbtn.active{background:#111;color:#fff}
+.userchip{display:none;align-items:center;gap:6px;background:#111;color:#fff;font-size:.78rem;font-weight:600;padding:8px 14px;border-radius:999px}
+/* ===== Hero ===== */
+header{max-width:1160px;margin:0 auto;padding:64px 24px 6px;text-align:center}
+.eyebrow{font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
+h1{font-weight:600;font-size:clamp(2.6rem,5.5vw,4.2rem);letter-spacing:-.045em;line-height:1.02;margin:14px 0 22px}
+.flag{width:min(300px,70vw);height:auto;display:block;margin:0 auto 20px;border-radius:14px;box-shadow:0 12px 30px rgba(0,56,184,.18),0 3px 8px rgba(0,0,0,.08)}
+.sub{color:var(--muted);max-width:620px;margin:0 auto;font-size:.97rem}
+/* ===== Stats (référence : cartes dégradés) ===== */
+.stats{display:grid;grid-template-columns:1.25fr 1.25fr 1fr 1fr;gap:14px;max-width:1160px;margin:34px auto 0;padding:0 24px}
+.stat{position:relative;border-radius:24px;padding:20px 22px;min-height:172px;overflow:hidden}
+.grad-green{background:linear-gradient(160deg,var(--green1),var(--green2));color:#fff;box-shadow:0 14px 30px -8px rgba(59,166,63,.45)}
+.grad-orange{background:linear-gradient(160deg,var(--orange1),var(--orange2));color:#fff;box-shadow:0 14px 30px -8px rgba(236,132,48,.45)}
+.stat.plain{background:var(--card);border:1px solid rgba(0,0,0,.04);box-shadow:0 10px 26px rgba(0,0,0,.05)}
+.s-label{font-size:.72rem;font-weight:600;opacity:.85;text-transform:uppercase;letter-spacing:.8px}
+.s-num{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-top:6px}
+.s-num.dark{color:var(--ink)}
+.s-pills{display:flex;gap:6px;margin-top:8px}
+.s-pills span{background:rgba(255,255,255,.25);border-radius:999px;font-size:.7rem;font-weight:600;padding:4px 11px}
+.stat.plain .s-sub{font-size:.8rem;color:var(--muted);margin-top:10px}
+.chip-arrow{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.22);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.spark{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;gap:3px;padding:0 22px 14px;height:40px}
+.spark i{flex:1;background:rgba(255,255,255,.35);border-radius:2px 2px 0 0}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+/* ===== Main ===== */
+main{max-width:1160px;margin:0 auto;padding:14px 24px 80px}
+.section-label{display:flex;align-items:baseline;gap:12px;margin:46px 0 18px}
+.section-label h3{font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.section-label span{font-size:.8rem;color:var(--faint)}
+.section-label.center{justify-content:center}
+/* ===== Cards ===== */
+.card{position:relative;background:var(--card);border:1px solid rgba(0,0,0,.04);border-radius:26px;padding:26px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.03),0 14px 36px rgba(0,0,0,.05);scroll-margin-top:100px;transition:box-shadow .25s}
+.card:hover{box-shadow:0 2px 4px rgba(0,0,0,.04),0 22px 48px rgba(0,0,0,.08)}
+.card.bonus{border-style:dashed}
+.card-top{display:flex;align-items:flex-start;gap:16px;padding-right:96px}
+.rank{flex:none;min-width:40px;height:28px;padding:0 10px;border-radius:9px;background:var(--panel);color:var(--muted);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.8rem}
+.title-wrap{flex:1;min-width:0}
+h2{font-size:1.35rem;font-weight:600;letter-spacing:-.025em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.meta{display:flex;flex-wrap:wrap;gap:5px 16px;margin-top:7px}
+.meta-item{font-size:.82rem;color:var(--muted);display:inline-flex;align-items:center;gap:7px}
+.dot{width:5px;height:5px;border-radius:50%;flex:none}
+.d-black{background:#111}.d-gray{background:#C9C9C0}.d-blue{background:#2F6FD0}
+.price{text-align:right;flex:none}
+.per{font-size:1.9rem;font-weight:700;letter-spacing:-.035em;color:var(--ink)}
+.per span{font-size:.8rem;font-weight:500;color:var(--faint)}
+.tot{font-size:.77rem;color:var(--faint)}
+.pill{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:5px 11px;border-radius:999px}
+.pill-gold{background:#F8EFDC;color:#93702B}
+.pill-green{background:var(--mint);color:var(--mint-ink)}
+.pill-blue{background:#E3EBFA;color:#2F5BA8}
+.pill-violet{background:#F0E7F7;color:#7A4FA3}
+.pill-orange{background:#FBE8DA;color:#B05E22}
+/* like */
+.like{position:absolute;top:-16px;right:-12px;z-index:6;display:inline-flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;color:#111;font-family:'Onest',sans-serif;font-size:.82rem;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.14);transition:transform .15s,border-color .15s,color .15s}
+.like:hover{transform:scale(1.06)}
+.like svg{transition:transform .15s}
+.like.liked{color:#E5484D;border-color:#F3C1C3}
+.like.liked svg{fill:#E5484D}
+.like svg.pop{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}
+/* mosaic */
+.mosaic{display:grid;grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:168px 168px;gap:8px;margin:20px 0}
+.mosaic img{width:100%;height:100%;object-fit:cover;border-radius:16px;cursor:zoom-in;transition:transform .25s}
+.mosaic img:hover{transform:scale(1.015)}
+.mosaic.m2{grid-template-columns:1fr 1fr;grid-template-rows:180px}
+.mosaic.m2 img:first-child{grid-row:auto}
+@media(max-width:680px){.mosaic{grid-template-columns:1fr 1fr;grid-template-rows:150px 150px 150px}.mosaic img:first-child{grid-column:1/3;grid-row:auto}.card-top{padding-right:0}.price{text-align:left}}
+.card-body{display:grid;grid-template-columns:1.1fr 1fr;gap:26px}
+@media(max-width:680px){.card-body{grid-template-columns:1fr}}
+h4{font-size:.68rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--faint);margin-bottom:10px;font-weight:700}
+ul{list-style:none}
+ul li{position:relative;padding:4px 0 4px 20px;font-size:.88rem;color:#3C3C38}
+ul li::before{content:"";position:absolute;left:0;top:12px;width:9px;height:2.5px;border-radius:2px;background:#111}
+.invoice{background:var(--panel);border-radius:18px;padding:16px 18px}
+.invoice table{width:100%;border-collapse:collapse;font-size:.84rem}
+.invoice td{padding:5px 0;color:var(--muted)}
+.invoice td:last-child{text-align:right;color:var(--ink);font-weight:500}
+.invoice tr.total td{border-top:1px dashed #D8D8CF;padding-top:9px;color:var(--ink);font-weight:600}
+.invoice tr.total td:last-child{font-weight:700}
+.card-foot{margin-top:18px}
+.party{display:flex;gap:10px;align-items:flex-start;border-radius:16px;padding:13px 16px;font-size:.85rem;margin-bottom:14px}
+.party.ok{background:var(--mint);color:#2A5A30}
+.party.ok b{color:var(--mint-ink)}
+.party.ask{background:var(--amber);color:#6B5A20}
+.party.ask b{color:var(--amber-ink)}
+.pdot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px}
+.party.ok .pdot{background:var(--mint-ink)}.party.ask .pdot{background:var(--amber-ink)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 24px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.86rem;transition:transform .15s,box-shadow .15s}
+.btn.primary{background:#111;color:#fff}
+.btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.btn.ghost{border:1px solid var(--line);color:var(--muted);background:#fff}
+/* summary */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--card);border:1px solid rgba(0,0,0,.04);border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.summary{width:100%;border-collapse:separate;border-spacing:0;font-size:.87rem}
+.summary th{text-align:left;padding:12px 16px;font-size:.66rem;text-transform:uppercase;letter-spacing:1.1px;color:var(--faint);border-bottom:1px solid var(--line)}
+.summary td{padding:10px 16px;border-top:1px solid #F0F0EA;color:var(--muted)}
+.summary tbody tr{cursor:pointer}
+.summary tbody tr:hover{background:#FAFAF6}
+.summary .tname{font-weight:600;color:var(--ink)}
+.summary .p{text-align:right;font-weight:700;color:var(--ink)}
+.lk-cell svg{vertical-align:-3px;margin-right:4px;color:#E5484D}
+.note{background:#FFF;border:1px solid rgba(0,0,0,.05);border-radius:18px;padding:16px 20px;font-size:.88rem;color:#4A4A44;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+.note b{color:#111}
+.pingouin{width:120px;height:auto;display:block;margin:16px auto 0;filter:drop-shadow(0 10px 22px rgba(0,0,0,.18))}
+.lion-end{text-align:center;margin:56px 0 10px}
+.lion-end img{width:min(400px,78vw);height:auto;filter:drop-shadow(0 22px 44px rgba(0,0,0,.2))}
+footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48px}
+
+/* ===== Mobile ===== */
+@media(max-width:680px){
+  .topbar{padding:0 10px;top:8px}
+  .topbar-in{gap:8px;padding:8px 8px 8px 16px}
+  .logo{font-size:.88rem}
+  .filters{gap:4px}
+  .fbtn{padding:7px 11px;font-size:.73rem}
+  header{padding:42px 16px 4px}
+  h1{font-size:clamp(2.1rem,9.5vw,2.8rem)}
+  .flag{width:min(250px,74vw)}
+  .pingouin{width:92px;margin-top:12px}
+  .stats{gap:10px;padding:0 14px;margin-top:26px}
+  .stat{padding:15px 17px;border-radius:20px;min-height:0}
+  .s-num{font-size:2rem}
+  .spark{height:30px;padding:0 17px 10px}
+  main{padding:10px 12px 60px}
+  .section-label{flex-wrap:wrap;gap:4px 10px;margin:36px 0 14px}
+  .card{padding:18px 14px;border-radius:22px;margin-bottom:26px}
+  .card-top{padding-right:80px;gap:10px}
+  .rank{min-width:34px;height:25px;font-size:.72rem}
+  h2{font-size:1.12rem;gap:7px}
+  .pill{font-size:.6rem;padding:4px 9px}
+  .per{font-size:1.45rem}
+  .tot{font-size:.7rem}
+  .meta{gap:4px 12px}
+  .like{top:-14px;right:6px;padding:7px 12px;font-size:.78rem;gap:5px}
+  .mosaic{grid-template-rows:118px 118px 118px;gap:6px;margin:16px 0}
+  .mosaic.m2{grid-template-rows:130px}
+  .card-body{gap:18px}
+  .invoice{padding:13px 14px}
+  .btn{padding:10px 18px;font-size:.8rem}
+  .party{font-size:.8rem;padding:11px 13px}
+  .lion-end{margin:40px 0 6px}
+  .note{padding:13px 15px;font-size:.83rem}
+  .modal-card{padding:24px 20px}
+}
+@media(max-width:520px){
+  .summary{font-size:.76rem;white-space:nowrap}
+  .summary th,.summary td{padding:9px 10px}
+  .summary th:nth-child(3),.summary td:nth-child(3),
+  .summary th:nth-child(4),.summary td:nth-child(4){display:none}
+  .userchip{padding:7px 10px;font-size:.72rem}
+}
+/* modal */
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(20,20,18,.35);backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.modal-card{background:#fff;border-radius:26px;padding:32px;width:min(400px,90vw);box-shadow:0 30px 80px rgba(0,0,0,.3);text-align:center}
+.modal-card h3{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.modal-card p{font-size:.86rem;color:var(--muted);margin-bottom:18px}
+.modal-card input{width:100%;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:13px 16px;font-family:'Onest',sans-serif;font-size:.95rem;margin-bottom:14px;outline:none}
+.modal-card input:focus{border-color:#111;background:#fff}
+.modal-card .btn.primary{width:100%;justify-content:center;border:none;cursor:pointer;font-family:'Onest',sans-serif}
+#lightbox{display:none;position:fixed;inset:0;background:rgba(20,20,18,.9);justify-content:center;align-items:center;z-index:100;cursor:zoom-out}
+#lightbox img{max-width:92%;max-height:90%;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.hidden{display:none!important}
+</style></head><body>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="logo">Maison <em>pour Chabatt</em></div>
+  <div class="filters">
+    <button class="fbtn active" data-f="all">Tout</button>
+    <button class="fbtn" data-f="landes">Landes</button>
+    <button class="fbtn" data-f="bearn">Béarn & Pyrénées</button>
+    <button class="fbtn" data-f="gers">Gers</button>
+    <button class="fbtn" data-f="dordogne">Dordogne & Sud</button>
+  </div>
+  <span class="userchip" id="userchip"></span>
+</div></div>
+
+<header>
+  <div class="eyebrow">31 décembre → 2 janvier · 16 personnes · départ Biscarrosse</div>
+  <h1>Maison pour Chabatt mon frère</h1>
+  <img class="flag" src="img/flag.png" alt="Drapeau d’Israël">
+<img class="pingouin" src="img/pingouin.png" alt="Pingouin">
+  <p class="sub">20 maisons chaleureuses à moins de 2h20 de route — Landes, Béarn, Gers et portes de la Dordogne. Toutes à moins de 110 €/personne pour les deux nuits, chez des loueurs en direct. Clique sur le cœur pour voter pour tes favorites.</p>
+</header>
+
+<div class="stats">
+  <div class="stat grad-green"><span class="chip-arrow">↗</span><div class="s-label">Plafond budget</div><div class="s-num">110 €</div><div class="s-pills"><span>par personne</span><span>2 nuits</span></div><div class="spark"><i style="height:6px"></i><i style="height:13px"></i><i style="height:20px"></i><i style="height:27px"></i><i style="height:12px"></i><i style="height:19px"></i><i style="height:26px"></i><i style="height:11px"></i><i style="height:18px"></i><i style="height:25px"></i><i style="height:10px"></i><i style="height:17px"></i><i style="height:24px"></i><i style="height:9px"></i><i style="height:16px"></i><i style="height:23px"></i><i style="height:8px"></i><i style="height:15px"></i><i style="height:22px"></i><i style="height:7px"></i><i style="height:14px"></i><i style="height:21px"></i><i style="height:6px"></i><i style="height:13px"></i><i style="height:20px"></i><i style="height:27px"></i></div></div>
+  <div class="stat grad-orange"><span class="chip-arrow">↗</span><div class="s-label">Meilleur prix</div><div class="s-num">47 €</div><div class="s-pills"><span>Lou Cazalet</span><span>Orthez · 64</span></div><div class="spark"><i style="height:6px"></i><i style="height:17px"></i><i style="height:8px"></i><i style="height:19px"></i><i style="height:10px"></i><i style="height:21px"></i><i style="height:12px"></i><i style="height:23px"></i><i style="height:14px"></i><i style="height:25px"></i><i style="height:16px"></i><i style="height:7px"></i><i style="height:18px"></i><i style="height:9px"></i><i style="height:20px"></i><i style="height:11px"></i><i style="height:22px"></i><i style="height:13px"></i><i style="height:24px"></i><i style="height:15px"></i><i style="height:6px"></i><i style="height:17px"></i><i style="height:8px"></i><i style="height:19px"></i><i style="height:10px"></i><i style="height:21px"></i></div></div>
+  <div class="stat plain"><div class="s-label">Voyageurs</div><div class="s-num dark">16</div><div class="s-sub">personnes · une seule maison</div></div>
+  <div class="stat plain"><div class="s-label">Sélection</div><div class="s-num dark">20</div><div class="s-sub">maisons · 4 zones · loueurs en direct</div></div>
+</div>
+
+<main>
+
+<article class="card" data-zone="bearn" id="g1">
+  <button class="like" data-id="1" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">01</div>
+    <div class="title-wrap">
+      <h2>Lou Cazalet <span class="pill pill-gold">Meilleur prix</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Orthez — cœur du Béarn des Gaves</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h25 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~45 min</span><span class="meta-item"><i class="dot d-gray"></i>17 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">47 €<span>/pers</span></div><div class="tot">≈ 755 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/cazalet1.jpg" alt="Lou Cazalet — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/cazalet2.jpg" alt="Lou Cazalet — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/cazalet3.jpg" alt="Lou Cazalet — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/cazalet4.jpg" alt="Lou Cazalet — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>220 m² · 5 chambres avec salle d'eau privative</li><li>Pièce de vie de 50 m² + cuisine semi-professionnelle</li><li>Gîtes de France 3 épis · terrasse, pétanque, baby-foot</li><li>1 ha de terrain au calme, ouvert toute l'année</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (haute saison, à partir de)</td><td>510 €</td></tr><tr><td>Draps (16 × 6 €)</td><td>96 €</td></tr><tr><td>Ménage (max)</td><td>120 €</td></tr><tr><td>Taxe de séjour (0,90 €/nuit/adulte)</td><td>≈ 29 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 755 € → <b>47 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Gîte de groupe habitué aux groupes, en zone rurale — confirmez simplement la soirée du 31 avec le propriétaire.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-lou-cazalet-131.htm" target="_blank">Voir la fiche &amp; contacter ↗</a><span class="btn ghost">📞 06 30 29 13 96</span></div>
+  </div>
+</article>
+
+<article class="card" data-zone="dordogne" id="g2">
+  <button class="like" data-id="2" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">02</div>
+    <div class="title-wrap">
+      <h2>Grand Gîte de Gary <span class="pill pill-green">Super prix</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Dolmayrac — vallée du Lot, porte du Périgord</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h00 de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages ⚠️</span></div>
+    </div>
+    <div class="price"><div class="per">59 €<span>/pers</span></div><div class="tot">≈ 950 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/grandgitegary1.jpg" alt="Grand Gîte de Gary — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/grandgitegary2.jpg" alt="Grand Gîte de Gary — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/grandgitegary3.jpg" alt="Grand Gîte de Gary — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/grandgitegary4.jpg" alt="Grand Gîte de Gary — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Ancienne grange en pierre éco-rénovée, pleine de charme</li><li>8 chambres avec <b>8 salles d'eau</b></li><li>Salon-séjour de 80 m² + grande pièce parquetée de 150 m²</li><li>Piscine naturelle, matériaux sains et bio</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse saison (nov.–mars)</td><td>600 €</td></tr><tr><td>Draps (16 × 10 €)</td><td>160 €</td></tr><tr><td>Ménage week-end</td><td>180 €</td></tr><tr><td>Taxe de séjour</td><td>non incluse</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 950 € → <b>59 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Grande bâtisse isolée au-dessus de la vallée — vérifier la 16ᵉ place (15 couchages affichés).</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-47-grand-gite-gary-398.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="dordogne" id="g3">
+  <button class="like" data-id="3" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">03</div>
+    <div class="title-wrap">
+      <h2>Le Rocal </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Saint-Robert — campagne agenaise</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h50 de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages ⚠️</span></div>
+    </div>
+    <div class="price"><div class="per">60 €<span>/pers</span></div><div class="tot">≈ 500–800 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/rocal1.jpg" alt="Le Rocal — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/rocal2.jpg" alt="Le Rocal — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/rocal3.jpg" alt="Le Rocal — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/rocal4.jpg" alt="Le Rocal — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>2 maisons indépendantes avec jardins clôturés</li><li>Piscine, ping-pong, badminton, pétanque</li><li>Grange attenante disponible pour les grandes tablées</li><li>Le prix le plus doux de la sélection en absolu</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (selon formule)</td><td>500–800 €</td></tr><tr><td>Linge de lit/toilette</td><td>à apporter ou en option</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 500–800 € → <b>60 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Petit domaine champêtre — 15 couchages, à confirmer pour 16 ; grange en option pour la soirée.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-47-rocal-5815.htm" target="_blank">Voir la fiche &amp; contacter ↗</a><span class="btn ghost">📞 06 84 85 72 13</span></div>
+  </div>
+</article>
+
+<article class="card" data-zone="bearn" id="g4">
+  <button class="like" data-id="4" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">04</div>
+    <div class="title-wrap">
+      <h2>Gîte des Mousquetaires <span class="pill pill-blue">Aux pieds des Pyrénées</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Lanne-en-Barétous — vallée de Barétous</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h55 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Dans les contreforts</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages ⚠️</span></div>
+    </div>
+    <div class="price"><div class="per">60 €<span>/pers</span></div><div class="tot">≈ 970 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/des-mousquetaires1.jpg" alt="Gîte des Mousquetaires — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/des-mousquetaires2.jpg" alt="Gîte des Mousquetaires — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/des-mousquetaires3.jpg" alt="Gîte des Mousquetaires — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/des-mousquetaires4.jpg" alt="Gîte des Mousquetaires — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Joli chalet de 230 m² · 7 chambres · 5 salles d'eau</li><li>Grande cheminée à foyer ouvert + comptoir bar</li><li>Au bord d'un ruisseau, terrain arboré de 3 200 m²</li><li>Classé 3 étoiles · 1 chambre PMR</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (haute saison)</td><td>650 €</td></tr><tr><td>Ménage fin de séjour</td><td>120 €</td></tr><tr><td>Draps (option, 16 × 10 €)</td><td>≈ 160 €</td></tr><tr><td>Taxe de séjour</td><td>≈ 37 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 970 € → <b>60 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Maison isolée dans la vallée, parfaite pour la fête — mais 15 couchages : prévoir l'appoint pour la 16ᵉ personne.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-des-mousquetaires-6712.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="bearn" id="g5">
+  <button class="like" data-id="5" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">05</div>
+    <div class="title-wrap">
+      <h2>Le Garaïbie <span class="pill pill-blue">Aux pieds des Pyrénées</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Ordiarp — Soule, forêt des Arbailles</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h05 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>En montagne (col de Napal)</span><span class="meta-item"><i class="dot d-gray"></i>32 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">62 €<span>/pers</span></div><div class="tot">≈ 1 000 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/garaibie1.jpg" alt="Le Garaïbie — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/garaibie2.jpg" alt="Le Garaïbie — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/garaibie3.jpg" alt="Le Garaïbie — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/garaibie4.jpg" alt="Le Garaïbie — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>600 m² · 14 chambres avec salle d'eau + WC <b>privés</b></li><li>Grand salon avec poêle à bois, bar, baby-foot</li><li>2 cuisines dont une professionnelle</li><li>Un seul groupe à la fois : privatisation totale</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>16 pers × 2 nuits × 30 €/pers/nuit</td><td>960 €</td></tr><tr><td>Électricité</td><td>au réel (relevé)</td></tr><tr><td>Caution</td><td>500 € (rendue)</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 000 € → <b>62 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ok"><span class="pdot"></span><div><b>Soirée friendly</b> — Le gîte n'accueille qu'un seul groupe — vous êtes seuls en pleine nature, zéro problème de bruit.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-groupe-le-garaibie-42.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="landes" id="g6">
+  <button class="like" data-id="6" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">06</div>
+    <div class="title-wrap">
+      <h2>Domaine Lacampagne </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Ossages — entre Landes et Béarn</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h05 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~1h</span><span class="meta-item"><i class="dot d-gray"></i>15–20 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">65 €<span>/pers</span></div><div class="tot">≈ 1 050 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/dom-lacampagne1.jpg" alt="Domaine Lacampagne — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/dom-lacampagne2.jpg" alt="Domaine Lacampagne — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/dom-lacampagne3.jpg" alt="Domaine Lacampagne — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/dom-lacampagne4.jpg" alt="Domaine Lacampagne — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Maison au style bohème chic de 365 m² · 7 chambres</li><li>Grand séjour de 90 m² + salle à manger en pierre de 40 m²</li><li>Aucun voisinage direct</li><li>Une des plus anciennes maisons du village, rénovée avec goût</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse saison (à partir de)</td><td>800 €</td></tr><tr><td>Ménage + options (estimation)</td><td>≈ 250 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 050 € → <b>65 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ok"><span class="pdot"></span><div><b>Soirée friendly</b> — Habituée des mariages et événements (aile de réception indépendante dispo), aucun voisin. ⚠️ Tarif spécifique 1er de l'an : demander le prix exact.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-40-domaine-lacampagne-6421.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="bearn" id="g7">
+  <button class="like" data-id="7" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">07</div>
+    <div class="title-wrap">
+      <h2>Zazpiak-Bat <span class="pill pill-blue">Dans les montagnes</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Saint-Jean-Pied-de-Port</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h15 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Vue sur les sommets</span><span class="meta-item"><i class="dot d-gray"></i>20 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">65 €<span>/pers</span></div><div class="tot">≈ 1 040 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/zazpiak-bat1.jpg" alt="Zazpiak-Bat — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/zazpiak-bat2.jpg" alt="Zazpiak-Bat — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/zazpiak-bat3.jpg" alt="Zazpiak-Bat — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/zazpiak-bat4.jpg" alt="Zazpiak-Bat — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>240 m² · 7 chambres avec salle de bain privative</li><li>Baies vitrées face aux montagnes</li><li>Terrasse couverte + jardin, à 800 m de la citadelle</li><li>Draps ET ménage inclus dans le prix</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>2 nuits (400–600 €/nuit)</td><td>≈ 1 000 €</td></tr><tr><td>Draps, serviettes, ménage</td><td>inclus</td></tr><tr><td>Taxe de séjour</td><td>≈ 37 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 040 € → <b>65 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Gîte de groupe sur les hauteurs de la cité basque — confirmer la soirée du 31.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-zazpiak-bat-5821.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="gers" id="g8">
+  <button class="like" data-id="8" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">08</div>
+    <div class="title-wrap">
+      <h2>Domaine de la Source </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Sainte-Christie-d'Armagnac — pays de Nogaro</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h40 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~1h15</span><span class="meta-item"><i class="dot d-gray"></i>17 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">70 €<span>/pers</span></div><div class="tot">≈ 1 100 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/delasource1.jpg" alt="Domaine de la Source — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/delasource2.jpg" alt="Domaine de la Source — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/delasource3.jpg" alt="Domaine de la Source — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/delasource4.jpg" alt="Domaine de la Source — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Demeure de charme · 2 gîtes · 5 chambres</li><li>Ambiance simple et décontractée, assumée</li><li>Piscine 5×9 m</li><li>Conçu pour recevoir une vingtaine de personnes</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (15/17 couchages)</td><td>800 €</td></tr><tr><td>Draps + ménage (estimation)</td><td>≈ 250 €</td></tr><tr><td>Taxe de séjour (2 €/nuit/adulte)</td><td>≈ 64 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 100 € → <b>70 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Gîte pensé pour les groupes — confirmer la soirée. Simple mais confortable, très bon plan budget.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-32-de-la-source-1736.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="dordogne" id="g9">
+  <button class="like" data-id="9" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">09</div>
+    <div class="title-wrap">
+      <h2>Airial des Monges <span class="pill pill-violet">Spa & piscine chauffée</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Marions — sud Gironde, pays vigneron</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h10 de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>Formules 20/26/46 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">70 €<span>/pers</span></div><div class="tot">≈ 1 000–1 200 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/airial-monges1.jpg" alt="Airial des Monges — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/airial-monges2.jpg" alt="Airial des Monges — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/airial-monges3.jpg" alt="Airial des Monges — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/airial-monges4.jpg" alt="Airial des Monges — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Domaine de 42 ha : forêt, prairies, étang de pêche</li><li><b>Piscine chauffée toute l'année + 4 spas + sauna</b></li><li>7 logements indépendants (17 chambres, 41 lits)</li><li>Beach-volley, lits faits à l'arrivée, linge inclus</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Gîte de groupe 15 pers (310 €/nuit × 2)</td><td>620 €</td></tr><tr><td>Logement(s) d'appoint + ménage obligatoire</td><td>≈ 400–600 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 000–1 200 € → <b>70 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Domaine immense sans voisins — confirmer la formule exacte (20 couchages) et la soirée.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-33-airial-monges-4595.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="landes" id="g10">
+  <button class="like" data-id="10" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">10</div>
+    <div class="title-wrap">
+      <h2>Les Gîtes du Grand Chêne </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Saint-Paul-en-Born — près de Mimizan</span><span class="meta-item"><i class="dot d-gray"></i>≈ 35 min de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>20 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">73 €<span>/pers</span></div><div class="tot">≈ 1 160 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/du-grand-chene1.jpg" alt="Les Gîtes du Grand Chêne — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/du-grand-chene2.jpg" alt="Les Gîtes du Grand Chêne — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/du-grand-chene3.jpg" alt="Les Gîtes du Grand Chêne — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/du-grand-chene4.jpg" alt="Les Gîtes du Grand Chêne — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Domaine privatisé : 3 gîtes de charme (240 m², 6 chambres)</li><li>Grange aménagée : billard, baby-foot, ping-pong, fitness</li><li>Bain à remous extérieur, beach-volley, pétanque</li><li>Draps ET ménage inclus</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse saison</td><td>990–1 110 €</td></tr><tr><td>Draps + ménage</td><td>inclus</td></tr><tr><td>Taxe de séjour</td><td>≈ 51 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 160 € → <b>73 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ok"><span class="pdot"></span><div><b>Soirée friendly</b> — Domaine entièrement privatisé — vous êtes seuls sur place, fête libre dans la grange aménagée.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-40-du-grand-chene-6378.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="gers" id="g11">
+  <button class="like" data-id="11" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">11</div>
+    <div class="title-wrap">
+      <h2>Ferme des Balances <span class="pill pill-orange">Forfait St-Sylvestre affiché</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Seissan — Gers rural</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h15 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~1h</span><span class="meta-item"><i class="dot d-gray"></i>23 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">75 €<span>/pers</span></div><div class="tot">1 200 € (forfait réveillon) · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/ferme-balances1.jpg" alt="Ferme des Balances — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/ferme-balances2.jpg" alt="Ferme des Balances — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/ferme-balances3.jpg" alt="Ferme des Balances — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/ferme-balances4.jpg" alt="Ferme des Balances — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>250 m² au cœur d'une ferme pédagogique</li><li>Grande salle à manger de 80 m² avec poêle à bois</li><li>Cuisine très bien équipée pour les repas de groupe</li><li>Le seul tarif exact et officiel pour le 31/12</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>St-Sylvestre — 3 jours / 2 nuits (forfait exact)</td><td>1 200 €</td></tr><tr><td>Électricité + bois du poêle + préchauffage</td><td>inclus</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>1 200 € (forfait réveillon) → <b>75 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ok"><span class="pdot"></span><div><b>Soirée friendly</b> — Les séjours de groupe sont leur métier, environnement isolé — et le forfait St-Sylvestre existe officiellement.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-32-ferme-balances-2393.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="landes" id="g12">
+  <button class="like" data-id="12" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">12</div>
+    <div class="title-wrap">
+      <h2>Hameau d'Orx </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Orx — sud Landes</span><span class="meta-item"><i class="dot d-gray"></i>≈ 55 min de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>22 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">75 €<span>/pers</span></div><div class="tot">≈ 1 200 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/orx1.jpg" alt="Hameau d'Orx — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/orx2.jpg" alt="Hameau d'Orx — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/orx3.jpg" alt="Hameau d'Orx — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/orx4.jpg" alt="Hameau d'Orx — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>300 m² · 7 chambres + dépendance</li><li>Salon de 45 m² + salle à manger de 45 m², piano</li><li>Chambres aux tons pastel, déco soignée</li><li>Grandes pièces de vie lumineuses de 90 m²</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse saison</td><td>840 €</td></tr><tr><td>Draps (estimation)</td><td>≈ 160 €</td></tr><tr><td>Ménage (estimation)</td><td>≈ 150 €</td></tr><tr><td>Taxe de séjour</td><td>non incluse</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 200 € → <b>75 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Belle maison spacieuse — confirmer la soirée du 31 avec les propriétaires.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-40-orx-1918.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="bearn" id="g13">
+  <button class="like" data-id="13" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">13</div>
+    <div class="title-wrap">
+      <h2>Mendipea </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Idaux-Mendy — Pays de Soule</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h10 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Face aux Pyrénées</span><span class="meta-item"><i class="dot d-gray"></i>18 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">80 €<span>/pers</span></div><div class="tot">≈ 1 300 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/mendipea1.jpg" alt="Mendipea — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/mendipea2.jpg" alt="Mendipea — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/mendipea3.jpg" alt="Mendipea — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/mendipea4.jpg" alt="Mendipea — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>315 m² récent de plain-pied · 8 chambres</li><li>Double séjour 2 × 40 m², cheminée double face</li><li>Ménage inclus dans le tarif</li><li>Accessible PMR (label Tourisme & Handicap)</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end 2 nuits (ménage inclus)</td><td>1 070–1 100 €</td></tr><tr><td>Draps (option, 16 × 10 €)</td><td>≈ 160 €</td></tr><tr><td>Taxe de séjour</td><td>≈ 37 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 300 € → <b>80 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Gîte récent face aux montagnes, entre Espelette et St-Jean-Pied-de-Port — confirmer la soirée.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-mendipea-3633.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="dordogne" id="g14">
+  <button class="like" data-id="14" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">14</div>
+    <div class="title-wrap">
+      <h2>Trois Fontaines </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Eynesse — aux portes de la Dordogne</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h10 de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages ⚠️</span></div>
+    </div>
+    <div class="price"><div class="per">83 €<span>/pers</span></div><div class="tot">≈ 1 325 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/trois-fontaines1.jpg" alt="Trois Fontaines — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/trois-fontaines2.jpg" alt="Trois Fontaines — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/trois-fontaines3.jpg" alt="Trois Fontaines — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/trois-fontaines4.jpg" alt="Trois Fontaines — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Maison de maître XIXᵉ de 280 m² · 8 chambres</li><li>Grande pièce de 45 m² ouverte sur un salon billard de 25 m²</li><li>Ancienne propriété viticole pleine de cachet</li><li>Option demi-pension et dégustation avec œnologue</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end</td><td>900 €</td></tr><tr><td>Ménage fin de séjour</td><td>200 €</td></tr><tr><td>Draps (16 × 12 €)</td><td>≈ 192 €</td></tr><tr><td>Taxe de séjour</td><td>≈ 32 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 325 € → <b>83 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Cadre très « maison de famille chic » — 15 couchages, à confirmer pour 16 ; soirée à valider avec la propriétaire.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-33-trois-fontaines-3463.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="gers" id="g15">
+  <button class="like" data-id="15" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">15</div>
+    <div class="title-wrap">
+      <h2>Domaine La Plagnette </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Saint-Jean-le-Comtal — 15 km d'Auch</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h15 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Vue Pyrénées (~1h)</span><span class="meta-item"><i class="dot d-gray"></i>23 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">84 €<span>/pers</span></div><div class="tot">≈ 1 340 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/plagnette1.jpg" alt="Domaine La Plagnette — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/plagnette2.jpg" alt="Domaine La Plagnette — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/plagnette3.jpg" alt="Domaine La Plagnette — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/plagnette4.jpg" alt="Domaine La Plagnette — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>10 chambres · 10 salles d'eau (confort rare)</li><li>Grande maison gasconne + chai rénové</li><li>Cheminée, pétanque, vue sur les Pyrénées</li><li>Gîtes de France 3 épis</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (toutes saisons)</td><td>850 €</td></tr><tr><td>Draps (forfait)</td><td>240 €</td></tr><tr><td>Ménage fin de séjour</td><td>250 €</td></tr><tr><td>Taxe de séjour</td><td>incluse</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 340 € → <b>84 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Isolé en pleine campagne — parfait pour ne déranger personne. Premier contact par mail.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-32-domaine-plagnette-3323.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="bearn" id="g16">
+  <button class="like" data-id="16" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">16</div>
+    <div class="title-wrap">
+      <h2>À la Belle Vue </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Bentayou-Sérée — portes de la Bigorre</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h00 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Vue sur la chaîne</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages + dortoir ⚠️</span></div>
+    </div>
+    <div class="price"><div class="per">87 €<span>/pers</span></div><div class="tot">≈ 1 390 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/bellevue1.jpg" alt="À la Belle Vue — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/bellevue2.jpg" alt="À la Belle Vue — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/bellevue3.jpg" alt="À la Belle Vue — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/bellevue4.jpg" alt="À la Belle Vue — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>450 m² · 7 chambres + dortoir · 5 salles d'eau</li><li>Vue imprenable sur la chaîne des Pyrénées</li><li>Grange couverte avec 2ᵉ cuisine pour le grand repas du 31</li><li>Terrain clôturé de 10 000 m², pétanque couvert, cheminée</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end</td><td>1 000 €</td></tr><tr><td>Draps (16 × 15 €)</td><td>240 €</td></tr><tr><td>Ménage fin de séjour</td><td>150 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 390 € → <b>87 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Maison isolée avec grange attenante pour la soirée — capacité à confirmer pour 16.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-a-la-belle-vue-5487.htm" target="_blank">Voir la fiche &amp; contacter ↗</a><span class="btn ghost">📞 06 75 30 97 49</span></div>
+  </div>
+</article>
+
+<article class="card" data-zone="landes" id="g17">
+  <button class="like" data-id="17" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">17</div>
+    <div class="title-wrap">
+      <h2>Le Brocq </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Bénesse-Maremne</span><span class="meta-item"><i class="dot d-gray"></i>≈ 55 min de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>19 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">88 €<span>/pers</span></div><div class="tot">≈ 1 400 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/le-brocq1.jpg" alt="Le Brocq — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/le-brocq2.jpg" alt="Le Brocq — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/le-brocq3.jpg" alt="Le Brocq — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/le-brocq4.jpg" alt="Le Brocq — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Ancienne ferme 185 m² + chalet 40 m² · 6 chambres</li><li>Salon-séjour de 50 m² avec cheminée (bois fourni)</li><li>Parc arboré et fleuri de 10 000 m²</li><li>Lits faits à l'arrivée</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse saison (à partir de)</td><td>1 200 €</td></tr><tr><td>Ménage obligatoire (estimation)</td><td>≈ 150 €</td></tr><tr><td>Draps</td><td>inclus, lits faits</td></tr><tr><td>Taxe de séjour</td><td>non incluse</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 400 € → <b>88 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Pensé pour les groupes d'amis et familles — confirmer la soirée.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-40-le-brocq-6151.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="gers" id="g18">
+  <button class="like" data-id="18" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">18</div>
+    <div class="title-wrap">
+      <h2>Gîte des Trois Mousquetaires </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Laas — plateau d'Astarac</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h20 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~45 min</span><span class="meta-item"><i class="dot d-gray"></i>25 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">90 €<span>/pers</span></div><div class="tot">≈ 1 250–1 650 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/3-mousquetaires1.jpg" alt="Gîte des Trois Mousquetaires — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/3-mousquetaires2.jpg" alt="Gîte des Trois Mousquetaires — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/3-mousquetaires3.jpg" alt="Gîte des Trois Mousquetaires — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/3-mousquetaires4.jpg" alt="Gîte des Trois Mousquetaires — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>Ancien relais de poste de 500 m² privatisé, 3 gîtes</li><li>Le fils, cuisinier de métier, peut cuisiner pour le 31</li><li>À deux pas des Pyrénées, proche Auch/Marciac</li><li>Vastes espaces intérieurs</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse / moyenne saison</td><td>1 250 / 1 650 €</td></tr><tr><td>Traiteur par le fils cuisinier</td><td>en option</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 250–1 650 € → <b>90 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ok"><span class="pdot"></span><div><b>Soirée friendly</b> — « Idéal pour toutes vos célébrations » selon l'annonce + option traiteur — excellent profil réveillon.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-32-trois-mousquetaires-5387.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="landes" id="g19">
+  <button class="like" data-id="19" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">19</div>
+    <div class="title-wrap">
+      <h2>La Maison du Bonheur </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Lit-et-Mixe — 7 km des plages</span><span class="meta-item"><i class="dot d-gray"></i>≈ 40 min de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>17 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">92 €<span>/pers</span></div><div class="tot">≈ 1 470 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/lamaisondubonheur1.jpg" alt="La Maison du Bonheur — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/lamaisondubonheur2.jpg" alt="La Maison du Bonheur — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/lamaisondubonheur3.jpg" alt="La Maison du Bonheur — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/lamaisondubonheur4.jpg" alt="La Maison du Bonheur — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>270 m² · 8 chambres · 5 salles de bain</li><li>Pièce de vie ouverte de 45–50 m²</li><li>Grand terrain de 2 500 m²</li><li>Pensée pour les « retrouvailles en tribu »</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end basse saison</td><td>1 200 €</td></tr><tr><td>Forfait ménage obligatoire (linge inclus)</td><td>≈ 200 €</td></tr><tr><td>Taxe de séjour (2,16 €/nuit/adulte)</td><td>≈ 69 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 470 € → <b>92 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Pensée pour les bandes d'amis — confirmer la soirée du 31.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-40-lamaisondubonheur-7910.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card" data-zone="bearn" id="g20">
+  <button class="like" data-id="20" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">20</div>
+    <div class="title-wrap">
+      <h2>Domaine Laboudigue <span class="pill pill-violet">Le plus cosy</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Salles-Montgiscard — entre Orthez et Salies</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h35 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~50 min</span><span class="meta-item"><i class="dot d-gray"></i>15 + 1 canapé-lit</span></div>
+    </div>
+    <div class="price"><div class="per">106 €<span>/pers</span></div><div class="tot">≈ 1 700 € · 2 nuits</div></div>
+  </div>
+  <div class="mosaic"><img src="img/laboudigue1.jpg" alt="Domaine Laboudigue — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/laboudigue2.jpg" alt="Domaine Laboudigue — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/laboudigue3.jpg" alt="Domaine Laboudigue — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/laboudigue4.jpg" alt="Domaine Laboudigue — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul><li>280 m² · 7 chambres · meublé 4 étoiles</li><li><b>Spa + piscine chauffée</b>, cheminée et poêle à bois</li><li>80 m² salon/cuisine/salle à manger + salle billard</li><li>Salon TV de 40 m² avec baby-foot</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (hors haute saison)</td><td>1 500 €</td></tr><tr><td>Ménage fin de séjour</td><td>200 €</td></tr><tr><td>Draps</td><td>inclus</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 700 € → <b>106 €/pers</b></td></tr></table></div>
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — ⚠️ Les vacances scolaires peuvent basculer en haute saison (2 500 € → ~169 €/pers) : confirmer le tarif du réveillon d'abord.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-dom-laboudigue-6327.htm" target="_blank">Voir la fiche &amp; contacter ↗</a><span class="btn ghost">📞 06 50 87 28 86</span></div>
+  </div>
+</article>
+
+<div class="section-label"><h3>Hors cadre mais à connaître</h3><span>au-dessus du plafond ou 3 nuits imposées</span></div>
+
+<article class="card bonus" data-zone="bonus" id="g101">
+  <button class="like" data-id="101" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">101</div>
+    <div class="title-wrap">
+      <h2>Manoir de la Gabertie </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Thézac (Lot-et-Garonne, 47)</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h10 de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>28 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">111 €<span>/pers</span></div><div class="tot"> · 2 nuits</div></div>
+  </div>
+  <div class="mosaic m2"><img src="img/gabertie1.jpg" alt="Manoir de la Gabertie — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/gabertie2.jpg" alt="Manoir de la Gabertie — photo 2" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul></ul></div>
+    
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div>Manoir classé monument historique de 550 m², 10 chambres, draps + ménage inclus. 1 750 € le week-end → ~111 €/pers : juste au-dessus du plafond, mais tout compris et très beau.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-47-manoir-gabertie-166.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<article class="card bonus" data-zone="bonus" id="g102">
+  <button class="like" data-id="102" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <div class="card-top">
+    <div class="rank">102</div>
+    <div class="title-wrap">
+      <h2>Domaine de Benquet </h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Le Houga (Gers, 32)</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h40 de Biscarrosse</span><span class="meta-item"><i class="dot d-gray"></i>22 couchages</span></div>
+    </div>
+    <div class="price"><div class="per">163 €<span>/pers</span></div><div class="tot"> · 2 nuits</div></div>
+  </div>
+  <div class="mosaic m2"><img src="img/benquet1.jpg" alt="Domaine de Benquet — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/benquet2.jpg" alt="Domaine de Benquet — photo 2" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="card-body">
+    <div class="features"><h4>Le bien</h4><ul></ul></div>
+    
+  </div>
+  <div class="card-foot">
+    <div class="party ask"><span class="pdot"></span><div>Chartreuse XIXᵉ sur 18 ha, salle à manger de 100 m², réceptions jusqu'à 40 personnes explicitement acceptées. Mais 3 nuits imposées pour le 31/12 + chauffage, ménage et draps obligatoires → ~2 600 €, hors budget.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-32-domaine-de-benquet-693.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+  </div>
+</article>
+
+<div class="lion-end"><img src="img/lion.png" alt="Lion"></div>
+
+<div class="section-label center" style="margin-top:56px"><h3>Conclusion — vue d'ensemble</h3></div>
+<div class="table-wrap"><table class="summary"><thead><tr><th>Maison</th><th>Zone</th><th>Route</th><th>Couchages</th><th>Likes</th><th style="text-align:right">€/pers</th></tr></thead><tbody><tr onclick="location.hash='g1'"><td class="tname">01 · Lou Cazalet</td><td>Béarn · 64</td><td>≈ 1h25</td><td>17 couchages</td><td class="lk-cell" data-id="1"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">47 €</td></tr>
+<tr onclick="location.hash='g2'"><td class="tname">02 · Grand Gîte de Gary</td><td>Lot-et-Garonne · 47</td><td>≈ 2h00</td><td>15 couchages*</td><td class="lk-cell" data-id="2"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">59 €</td></tr>
+<tr onclick="location.hash='g3'"><td class="tname">03 · Le Rocal</td><td>Lot-et-Garonne · 47</td><td>≈ 1h50</td><td>15 couchages*</td><td class="lk-cell" data-id="3"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">60 €</td></tr>
+<tr onclick="location.hash='g4'"><td class="tname">04 · Gîte des Mousquetaires</td><td>Béarn · 64</td><td>≈ 1h55</td><td>15 couchages*</td><td class="lk-cell" data-id="4"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">60 €</td></tr>
+<tr onclick="location.hash='g5'"><td class="tname">05 · Le Garaïbie</td><td>Béarn · 64</td><td>≈ 2h05</td><td>32 couchages</td><td class="lk-cell" data-id="5"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">62 €</td></tr>
+<tr onclick="location.hash='g6'"><td class="tname">06 · Domaine Lacampagne</td><td>Landes · 40</td><td>≈ 1h05</td><td>15–20 couchages</td><td class="lk-cell" data-id="6"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">65 €</td></tr>
+<tr onclick="location.hash='g7'"><td class="tname">07 · Zazpiak-Bat</td><td>Béarn · 64</td><td>≈ 2h15</td><td>20 couchages</td><td class="lk-cell" data-id="7"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">65 €</td></tr>
+<tr onclick="location.hash='g8'"><td class="tname">08 · Domaine de la Source</td><td>Gers · 32</td><td>≈ 1h40</td><td>17 couchages</td><td class="lk-cell" data-id="8"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">70 €</td></tr>
+<tr onclick="location.hash='g9'"><td class="tname">09 · Airial des Monges</td><td>Sud Gironde · 33</td><td>≈ 1h10</td><td>Formules 20/26/46 couchages</td><td class="lk-cell" data-id="9"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">70 €</td></tr>
+<tr onclick="location.hash='g10'"><td class="tname">10 · Les Gîtes du Grand Chêne</td><td>Landes · 40</td><td>≈ 35 min</td><td>20 couchages</td><td class="lk-cell" data-id="10"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">73 €</td></tr>
+<tr onclick="location.hash='g11'"><td class="tname">11 · Ferme des Balances</td><td>Gers · 32</td><td>≈ 2h15</td><td>23 couchages</td><td class="lk-cell" data-id="11"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">75 €</td></tr>
+<tr onclick="location.hash='g12'"><td class="tname">12 · Hameau d'Orx</td><td>Landes · 40</td><td>≈ 55 min</td><td>22 couchages</td><td class="lk-cell" data-id="12"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">75 €</td></tr>
+<tr onclick="location.hash='g13'"><td class="tname">13 · Mendipea</td><td>Béarn · 64</td><td>≈ 2h10</td><td>18 couchages</td><td class="lk-cell" data-id="13"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">80 €</td></tr>
+<tr onclick="location.hash='g14'"><td class="tname">14 · Trois Fontaines</td><td>Sud Gironde · 33</td><td>≈ 2h10</td><td>15 couchages*</td><td class="lk-cell" data-id="14"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">83 €</td></tr>
+<tr onclick="location.hash='g15'"><td class="tname">15 · Domaine La Plagnette</td><td>Gers · 32</td><td>≈ 2h15</td><td>23 couchages</td><td class="lk-cell" data-id="15"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">84 €</td></tr>
+<tr onclick="location.hash='g16'"><td class="tname">16 · À la Belle Vue</td><td>Béarn · 64</td><td>≈ 2h00</td><td>15 couchages + dortoir*</td><td class="lk-cell" data-id="16"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">87 €</td></tr>
+<tr onclick="location.hash='g17'"><td class="tname">17 · Le Brocq</td><td>Landes · 40</td><td>≈ 55 min</td><td>19 couchages</td><td class="lk-cell" data-id="17"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">88 €</td></tr>
+<tr onclick="location.hash='g18'"><td class="tname">18 · Gîte des Trois Mousquetaires</td><td>Gers · 32</td><td>≈ 2h20</td><td>25 couchages</td><td class="lk-cell" data-id="18"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">90 €</td></tr>
+<tr onclick="location.hash='g19'"><td class="tname">19 · La Maison du Bonheur</td><td>Landes · 40</td><td>≈ 40 min</td><td>17 couchages</td><td class="lk-cell" data-id="19"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">92 €</td></tr>
+<tr onclick="location.hash='g20'"><td class="tname">20 · Domaine Laboudigue</td><td>Béarn · 64</td><td>≈ 1h35</td><td>15 + 1 canapé-lit</td><td class="lk-cell" data-id="20"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">106 €</td></tr></tbody></table></div>
+
+<div class="section-label center" style="margin-top:44px"><h3>Bon à savoir</h3></div>
+<div class="note">⚠️ <strong>Tarifs :</strong> indicatifs, affichés par les loueurs en direct (sans commission Airbnb/Booking). Le réveillon est parfois majoré ou imposé en 3 nuits — seule la <strong>Ferme des Balances</strong> affiche un forfait exact St-Sylvestre (1 200 € / 2 nuits).</div>
+<div class="note">🥳 <strong>Soirée :</strong> les maisons marquées « soirée friendly » acceptent explicitement les groupes et réceptions ; pour les autres, un simple message suffit (« soirée du 31 respectueuse des lieux »).</div>
+<div class="note">⛰️ <strong>Envie de montagne :</strong> les options Béarn/Soule (Garaïbie, Mousquetaires, Zazpiak-Bat, Mendipea) vous placent à ~45 min des vallées — parfait pour une journée neige le 1er janvier.</div>
+<div class="note">💡 <strong>Conseil :</strong> écris aujourd'hui à tes 3-4 favorites avec les dates exactes et « 16 personnes » — réponse en général sous 24-48 h, sans commission.</div>
+</main>
+
+<footer>Sélection du 13/11/2026 · Loueurs en direct (GrandsGites.com) · Disponibilités 31/12 → 02/01 à confirmer auprès de chaque propriétaire.</footer>
+
+<div class="modal" id="namemodal">
+  <div class="modal-card">
+    <h3>Qui es-tu ma ptite salope ?</h3>
+    <input type="text" id="nameinput" placeholder="Ton prénom" maxlength="30">
+    <button class="btn primary" id="namebtn">Valider</button>
+  </div>
+</div>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbimg" src=""></div>
+<script>
+function zoom(s){document.getElementById('lbimg').src=s;document.getElementById('lightbox').style.display='flex';}
+document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const f=b.dataset.f;
+  document.querySelectorAll('article.card').forEach(c=>{c.classList.toggle('hidden', f!=='all' && c.dataset.zone!==f);});
+}));
+
+/* ===== Système de likes ===== */
+const LS_NAME='chabatt-name', LS_LIKES='chabatt-likes';
+let user=localStorage.getItem(LS_NAME)||'';
+let likes={}; try{likes=JSON.parse(localStorage.getItem(LS_LIKES)||'{}');}catch(e){}
+let pendingId=null;
+const modal=document.getElementById('namemodal');
+
+function saveLikes(){localStorage.setItem(LS_LIKES,JSON.stringify(likes));}
+function renderLikes(){
+  document.querySelectorAll('.like').forEach(l=>{
+    const n=likes[l.dataset.id]||0;
+    l.querySelector('.lk-n').textContent=n;
+    l.classList.toggle('liked',n>0);
+  });
+  document.querySelectorAll('.lk-cell').forEach(c=>{
+    c.querySelector('span').textContent=likes[c.dataset.id]||0;
+  });
+  const u=document.getElementById('userchip');
+  if(user){u.textContent='♥ '+user;u.style.display='inline-flex';}
+}
+function bump(id){
+  likes[id]=(likes[id]||0)+1;
+  saveLikes();renderLikes();
+  const h=document.querySelector('.like[data-id="'+id+'"] svg');
+  if(h){h.classList.remove('pop');void h.getBoundingClientRect();h.classList.add('pop');}
+}
+document.querySelectorAll('.like').forEach(l=>l.addEventListener('click',()=>{
+  if(!user){pendingId=l.dataset.id;modal.classList.add('open');setTimeout(()=>document.getElementById('nameinput').focus(),80);return;}
+  bump(l.dataset.id);
+}));
+function submitName(){
+  const v=document.getElementById('nameinput').value.trim();
+  if(!v)return;
+  user=v;localStorage.setItem(LS_NAME,user);
+  modal.classList.remove('open');
+  renderLikes();
+  if(pendingId!==null)bump(pendingId);
+}
+document.getElementById('namebtn').addEventListener('click',submitName);
+document.getElementById('nameinput').addEventListener('keydown',e=>{if(e.key==='Enter')submitName();});
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open');});
+renderLikes();
+</script>
+</body></html>
