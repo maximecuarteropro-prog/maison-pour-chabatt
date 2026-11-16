@@ -15,16 +15,6 @@ html{scroll-behavior:smooth}
 html,body{overflow-x:clip}
 body{font-family:'Onest',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
 img{max-width:100%}
-/* ===== Topbar ===== */
-.topbar{position:sticky;top:12px;z-index:50;max-width:1160px;margin:12px auto 0;padding:0 24px}
-.topbar-in{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(255,255,255,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(0,0,0,.04);border-radius:999px;padding:10px 12px 10px 22px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
-.logo{font-weight:700;font-size:.95rem;letter-spacing:-.01em}
-.logo em{font-style:normal;color:var(--green2)}
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
-.fbtn{border:none;background:transparent;color:var(--muted);padding:8px 15px;border-radius:999px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Onest',sans-serif}
-.fbtn:hover{background:#EFEFEA;color:var(--ink)}
-.fbtn.active{background:#111;color:#fff}
-.userchip{display:none;align-items:center;gap:6px;background:#111;color:#fff;font-size:.78rem;font-weight:600;padding:8px 14px;border-radius:999px}
 /* ===== Hero ===== */
 header{max-width:1160px;margin:0 auto;padding:64px 24px 6px;text-align:center}
 .eyebrow{font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.02em}
@@ -134,11 +124,6 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
 
 /* ===== Mobile ===== */
 @media(max-width:680px){
-  .topbar{padding:0 10px;top:8px}
-  .topbar-in{gap:8px;padding:8px 8px 8px 16px}
-  .logo{font-size:.88rem}
-  .filters{gap:4px}
-  .fbtn{padding:7px 11px;font-size:.73rem}
   header{padding:42px 16px 4px}
   h1{font-size:clamp(2.1rem,9.5vw,2.8rem)}
   .flag{width:min(250px,74vw)}
@@ -173,7 +158,6 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
   .summary th,.summary td{padding:9px 10px}
   .summary th:nth-child(3),.summary td:nth-child(3),
   .summary th:nth-child(4),.summary td:nth-child(4){display:none}
-  .userchip{padding:7px 10px;font-size:.72rem}
 }
 /* modal */
 .modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(20,20,18,.35);backdrop-filter:blur(6px)}
@@ -189,23 +173,11 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
 .hidden{display:none!important}
 </style></head><body>
 
-<div class="topbar"><div class="topbar-in">
-  <div class="logo">Maison <em>pour Chabatt</em></div>
-  <div class="filters">
-    <button class="fbtn active" data-f="all">Tout</button>
-    <button class="fbtn" data-f="landes">Landes</button>
-    <button class="fbtn" data-f="bearn">Béarn & Pyrénées</button>
-    <button class="fbtn" data-f="gers">Gers</button>
-    <button class="fbtn" data-f="dordogne">Dordogne & Sud</button>
-  </div>
-  <span class="userchip" id="userchip"></span>
-</div></div>
-
 <header>
   <div class="eyebrow">31 décembre → 2 janvier · 16 personnes · départ Biscarrosse</div>
   <h1>Maison pour Chabatt mon frère</h1>
-  <img class="flag" src="img/flag.png" alt="Drapeau d’Israël">
-<img class="pingouin" src="img/pingouin.png" alt="Pingouin">
+  <img class="flag" src="img/flag.webp" alt="Drapeau d’Israël">
+<img class="pingouin" src="img/pingouin.webp" alt="Pingouin">
   <p class="sub">20 maisons chaleureuses à moins de 2h20 de route — Landes, Béarn, Gers et portes de la Dordogne. Toutes à moins de 110 €/personne pour les deux nuits, chez des loueurs en direct. Clique sur le cœur pour voter pour tes favorites.</p>
 </header>
 
@@ -281,44 +253,44 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
 </article>
 
 <article class="card" data-zone="bearn" id="g4">
-  <button class="like" data-id="4" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <button class="like" data-id="21" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
   <div class="card-top">
     <div class="rank">04</div>
     <div class="title-wrap">
-      <h2>Gîte des Mousquetaires <span class="pill pill-blue">Aux pieds des Pyrénées</span></h2>
-      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Lanne-en-Barétous — vallée de Barétous</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h55 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Dans les contreforts</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages ⚠️</span></div>
+      <h2>Ithurrondoa <span class="pill pill-blue">Grand salon</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Masparraute — Pays Basque intérieur</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h40 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Pyrénées à ~45 min</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages*</span></div>
     </div>
-    <div class="price"><div class="per">60 €<span>/pers</span></div><div class="tot">≈ 970 € · 2 nuits</div></div>
+    <div class="price"><div class="per">52 €<span>/pers</span></div><div class="tot">≈ 780 € · 2 nuits</div></div>
   </div>
-  <div class="mosaic"><img src="img/des-mousquetaires1.webp" alt="Gîte des Mousquetaires — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/des-mousquetaires2.webp" alt="Gîte des Mousquetaires — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/des-mousquetaires3.webp" alt="Gîte des Mousquetaires — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/des-mousquetaires4.webp" alt="Gîte des Mousquetaires — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="mosaic"><img src="img/ithurrondoa1.webp" alt="Ithurrondoa — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/ithurrondoa2.webp" alt="Ithurrondoa — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/ithurrondoa3.webp" alt="Ithurrondoa — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/ithurrondoa4.webp" alt="Ithurrondoa — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
   <div class="card-body">
-    <div class="features"><h4>Le bien</h4><ul><li>Joli chalet de 230 m² · 7 chambres · 5 salles d'eau</li><li>Grande cheminée à foyer ouvert + comptoir bar</li><li>Au bord d'un ruisseau, terrain arboré de 3 200 m²</li><li>Classé 3 étoiles · 1 chambre PMR</li></ul></div>
-    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end (haute saison)</td><td>650 €</td></tr><tr><td>Ménage fin de séjour</td><td>120 €</td></tr><tr><td>Draps (option, 16 × 10 €)</td><td>≈ 160 €</td></tr><tr><td>Taxe de séjour</td><td>≈ 37 €</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 970 € → <b>60 €/pers</b></td></tr></table></div>
+    <div class="features"><h4>Le bien</h4><ul><li>Maison basque rénovée · <b>grand salon</b> avec canapé panoramique + salle à manger sous poutres</li><li>Terrasse couverte : ping-pong et longue table de banquet</li><li>Piscine privée · draps fournis · ouvert jusqu'en décembre</li><li>Au calme, entre coteaux et forêts du Pays Basque intérieur</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end fin d'année (à partir de)</td><td>620 €</td></tr><tr><td>Ménage fin de séjour</td><td>120 €</td></tr><tr><td>Taxe de séjour</td><td>≈ 40 €</td></tr><tr class="total"><td>Total ÷ 15 pers</td><td>≈ 780 € → <b>52 €/pers</b></td></tr></table></div>
   </div>
   <div class="card-foot">
-    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Maison isolée dans la vallée, parfaite pour la fête — mais 15 couchages : prévoir l'appoint pour la 16ᵉ personne.</div></div>
-    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-des-mousquetaires-6712.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — Gîte familial au calme, ouvert jusqu'en décembre — confirmez simplement la soirée du 31 avec la propriétaire.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-ithurrondoa-1876.htm" target="_blank">Voir la fiche &amp; contacter ↗</a><span class="btn ghost">📞 06 85 14 48 46</span></div>
   </div>
 </article>
 
 <article class="card" data-zone="bearn" id="g5">
-  <button class="like" data-id="5" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
+  <button class="like" data-id="22" title="Liker cette maison"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="lk-n">0</span></button>
   <div class="card-top">
     <div class="rank">05</div>
     <div class="title-wrap">
-      <h2>Le Garaïbie <span class="pill pill-blue">Aux pieds des Pyrénées</span></h2>
-      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Ordiarp — Soule, forêt des Arbailles</span><span class="meta-item"><i class="dot d-gray"></i>≈ 2h05 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>En montagne (col de Napal)</span><span class="meta-item"><i class="dot d-gray"></i>32 couchages</span></div>
+      <h2>Maison Sagardian <span class="pill pill-blue">Pays Basque</span></h2>
+      <div class="meta"><span class="meta-item"><i class="dot d-black"></i>Ascain — au pied de la Rhune</span><span class="meta-item"><i class="dot d-gray"></i>≈ 1h45 de Biscarrosse</span><span class="meta-item"><i class="dot d-blue"></i>Montagne à 200 m</span><span class="meta-item"><i class="dot d-gray"></i>15 couchages*</span></div>
     </div>
-    <div class="price"><div class="per">62 €<span>/pers</span></div><div class="tot">≈ 1 000 € · 2 nuits</div></div>
+    <div class="price"><div class="per">65 €<span>/pers</span></div><div class="tot">≈ 975 € · 2 nuits</div></div>
   </div>
-  <div class="mosaic"><img src="img/garaibie1.webp" alt="Le Garaïbie — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/garaibie2.webp" alt="Le Garaïbie — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/garaibie3.webp" alt="Le Garaïbie — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/garaibie4.webp" alt="Le Garaïbie — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
+  <div class="mosaic"><img src="img/sagardian1.webp" alt="Maison Sagardian — photo 1" onclick="zoom(this.src)" loading="lazy"><img src="img/sagardian2.webp" alt="Maison Sagardian — photo 2" onclick="zoom(this.src)" loading="lazy"><img src="img/sagardian3.webp" alt="Maison Sagardian — photo 3" onclick="zoom(this.src)" loading="lazy"><img src="img/sagardian4.webp" alt="Maison Sagardian — photo 4" onclick="zoom(this.src)" loading="lazy"></div>
   <div class="card-body">
-    <div class="features"><h4>Le bien</h4><ul><li>600 m² · 14 chambres avec salle d'eau + WC <b>privés</b></li><li>Grand salon avec poêle à bois, bar, baby-foot</li><li>2 cuisines dont une professionnelle</li><li>Un seul groupe à la fois : privatisation totale</li></ul></div>
-    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>16 pers × 2 nuits × 30 €/pers/nuit</td><td>960 €</td></tr><tr><td>Électricité</td><td>au réel (relevé)</td></tr><tr><td>Caution</td><td>500 € (rendue)</td></tr><tr class="total"><td>Total ÷ 16 pers</td><td>≈ 1 000 € → <b>62 €/pers</b></td></tr></table></div>
+    <div class="features"><h4>Le bien</h4><ul><li>2 gîtes communicants = <b>2 pièces à vivre</b> pour le groupe</li><li>Grande cuisine/salle à manger — 15 couverts à table</li><li>Baby-foot, ping-pong, fléchettes · vue sur la Rhune</li><li>Ouvert toute l'année · sentiers de montagne au départ de la maison</li></ul></div>
+    <div class="invoice"><h4>Prix · 2 nuits · 31/12 → 02/01</h4><table><tr><td>Week-end moyenne saison</td><td>750 €</td></tr><tr><td>Taxe de séjour (≈ 2,50 €/nuit/adulte)</td><td>≈ 75 €</td></tr><tr><td>Ménage fin de séjour</td><td>150 €</td></tr><tr class="total"><td>Total ÷ 15 pers</td><td>≈ 975 € → <b>65 €/pers</b></td></tr></table></div>
   </div>
   <div class="card-foot">
-    <div class="party ok"><span class="pdot"></span><div><b>Soirée friendly</b> — Le gîte n'accueille qu'un seul groupe — vous êtes seuls en pleine nature, zéro problème de bruit.</div></div>
-    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-groupe-le-garaibie-42.htm" target="_blank">Voir la fiche &amp; contacter ↗</a></div>
+    <div class="party ask"><span class="pdot"></span><div><b>Soirée à confirmer</b> — 2 salons + jeux de bar, maison faite pour les groupes — confirmez simplement le 31 avec la propriétaire.</div></div>
+    <div class="actions"><a class="btn primary" href="https://www.grandsgites.com/gite-64-maison-sagardian-5246.htm" target="_blank">Voir la fiche &amp; contacter ↗</a><span class="btn ghost">📞 06 82 03 48 91</span></div>
   </div>
 </article>
 
@@ -681,14 +653,14 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
   </div>
 </article>
 
-<div class="lion-end"><img src="img/lion.png" alt="Lion"></div>
+<div class="lion-end"><img src="img/lion.webp" alt="Lion"></div>
 
 <div class="section-label center" style="margin-top:56px"><h3>Conclusion — vue d'ensemble</h3></div>
 <div class="table-wrap"><table class="summary"><thead><tr><th>Maison</th><th>Zone</th><th>Route</th><th>Couchages</th><th>Likes</th><th style="text-align:right">€/pers</th></tr></thead><tbody><tr onclick="location.hash='g1'"><td class="tname">01 · Lou Cazalet</td><td>Béarn · 64</td><td>≈ 1h25</td><td>17 couchages</td><td class="lk-cell" data-id="1"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">47 €</td></tr>
 <tr onclick="location.hash='g2'"><td class="tname">02 · Grand Gîte de Gary</td><td>Lot-et-Garonne · 47</td><td>≈ 2h00</td><td>15 couchages*</td><td class="lk-cell" data-id="2"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">59 €</td></tr>
 <tr onclick="location.hash='g3'"><td class="tname">03 · Le Rocal</td><td>Lot-et-Garonne · 47</td><td>≈ 1h50</td><td>15 couchages*</td><td class="lk-cell" data-id="3"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">60 €</td></tr>
-<tr onclick="location.hash='g4'"><td class="tname">04 · Gîte des Mousquetaires</td><td>Béarn · 64</td><td>≈ 1h55</td><td>15 couchages*</td><td class="lk-cell" data-id="4"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">60 €</td></tr>
-<tr onclick="location.hash='g5'"><td class="tname">05 · Le Garaïbie</td><td>Béarn · 64</td><td>≈ 2h05</td><td>32 couchages</td><td class="lk-cell" data-id="5"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">62 €</td></tr>
+<tr onclick="location.hash='g4'"><td class="tname">04 · Ithurrondoa</td><td>Béarn · 64</td><td>≈ 1h40</td><td>15 couchages*</td><td class="lk-cell" data-id="21"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">52 €</td></tr>
+<tr onclick="location.hash='g5'"><td class="tname">05 · Maison Sagardian</td><td>Béarn · 64</td><td>≈ 1h45</td><td>15 couchages*</td><td class="lk-cell" data-id="22"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">65 €</td></tr>
 <tr onclick="location.hash='g6'"><td class="tname">06 · Domaine Lacampagne</td><td>Landes · 40</td><td>≈ 1h05</td><td>15–20 couchages</td><td class="lk-cell" data-id="6"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">65 €</td></tr>
 <tr onclick="location.hash='g7'"><td class="tname">07 · Zazpiak-Bat</td><td>Béarn · 64</td><td>≈ 2h15</td><td>20 couchages</td><td class="lk-cell" data-id="7"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">65 €</td></tr>
 <tr onclick="location.hash='g8'"><td class="tname">08 · Domaine de la Source</td><td>Gers · 32</td><td>≈ 1h40</td><td>17 couchages</td><td class="lk-cell" data-id="8"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>0</span></td><td class="p">70 €</td></tr>
@@ -708,7 +680,7 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
 <div class="section-label center" style="margin-top:44px"><h3>Bon à savoir</h3></div>
 <div class="note">⚠️ <strong>Tarifs :</strong> indicatifs, affichés par les loueurs en direct (sans commission Airbnb/Booking). Le réveillon est parfois majoré ou imposé en 3 nuits — seule la <strong>Ferme des Balances</strong> affiche un forfait exact St-Sylvestre (1 200 € / 2 nuits).</div>
 <div class="note">🥳 <strong>Soirée :</strong> les maisons marquées « soirée friendly » acceptent explicitement les groupes et réceptions ; pour les autres, un simple message suffit (« soirée du 31 respectueuse des lieux »).</div>
-<div class="note">⛰️ <strong>Envie de montagne :</strong> les options Béarn/Soule (Garaïbie, Mousquetaires, Zazpiak-Bat, Mendipea) vous placent à ~45 min des vallées — parfait pour une journée neige le 1er janvier.</div>
+<div class="note">⛰️ <strong>Envie de montagne :</strong> les options Béarn/Pays Basque (Ithurrondoa, Sagardian, Zazpiak-Bat, Mendipea) vous placent à ~45 min des vallées — parfait pour une journée neige le 1er janvier.</div>
 <div class="note">💡 <strong>Conseil :</strong> écris aujourd'hui à tes 3-4 favorites avec les dates exactes et « 16 personnes » — réponse en général sous 24-48 h, sans commission.</div>
 </main>
 
@@ -725,13 +697,6 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
 <div id="lightbox" onclick="this.style.display='none'"><img id="lbimg" src=""></div>
 <script>
 function zoom(s){document.getElementById('lbimg').src=s;document.getElementById('lightbox').style.display='flex';}
-document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  const f=b.dataset.f;
-  document.querySelectorAll('article.card').forEach(c=>{c.classList.toggle('hidden', f!=='all' && c.dataset.zone!==f);});
-}));
-
 /* ===== Système de likes ===== */
 const LS_NAME='chabatt-name', LS_LIKES='chabatt-likes';
 let user=localStorage.getItem(LS_NAME)||'';
@@ -750,7 +715,7 @@ function renderLikes(){
     c.querySelector('span').textContent=likes[c.dataset.id]||0;
   });
   const u=document.getElementById('userchip');
-  if(user){u.textContent='♥ '+user;u.style.display='inline-flex';}
+  if(u&&user){u.textContent='♥ '+user;u.style.display='inline-flex';}
 }
 function bump(id){
   likes[id]=(likes[id]||0)+1;
