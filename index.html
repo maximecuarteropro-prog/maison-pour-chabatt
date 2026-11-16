@@ -491,12 +491,14 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:24px 20px 48
 function zoom(s){document.getElementById('lbimg').src=s;document.getElementById('lightbox').style.display='flex';}
 /* ===== Système de likes ===== */
 const LS_NAME='chabatt-name', LS_LIKES='chabatt-likes';
-let user=localStorage.getItem(LS_NAME)||'';
-let likes={}; try{likes=JSON.parse(localStorage.getItem(LS_LIKES)||'{}');}catch(e){}
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+let user=lsGet(LS_NAME)||'';
+let likes={}; try{likes=JSON.parse(lsGet(LS_LIKES)||'{}');}catch(e){}
 let pendingId=null;
 const modal=document.getElementById('namemodal');
 
-function saveLikes(){localStorage.setItem(LS_LIKES,JSON.stringify(likes));}
+function saveLikes(){lsSet(LS_LIKES,JSON.stringify(likes));}
 function renderLikes(){
   document.querySelectorAll('.like').forEach(l=>{
     const n=likes[l.dataset.id]||0;
@@ -522,7 +524,7 @@ document.querySelectorAll('.like').forEach(l=>l.addEventListener('click',()=>{
 function submitName(){
   const v=document.getElementById('nameinput').value.trim();
   if(!v)return;
-  user=v;localStorage.setItem(LS_NAME,user);
+  user=v;lsSet(LS_NAME,user);
   modal.classList.remove('open');
   renderLikes();
   if(pendingId!==null)bump(pendingId);
